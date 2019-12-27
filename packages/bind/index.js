@@ -6,6 +6,8 @@ Function.prototype.bind = function () {
   var thatArgs = args.slice(1)
 
   return function () {
-    return thatFun.call(thatEnv, thatArgs)
+    funArgs = thatArgs.concat(Array.prototype.slice.call(arguments))
+
+    return thatFun.call(thatEnv, funArgs)
   }
 }
