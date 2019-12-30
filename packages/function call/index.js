@@ -4,15 +4,14 @@ Function.prototype.call = function() {
   var args = slice(arguments)
   var thatFun = this
   var thatEnv = args[0]
-  var thatArgs = args.slice(0)
+  var thatArgs = args.slice(1)
 
   return (function () {
-    var that = this
-    this = thatEnv
+    thatEnv.thatFun = thatFun
 
-    var result = thatFun(thatArgs)
+    var result = thatEnv.thatFun(...thatArgs)
 
-    this = that
+    delete thatEnv.thatFun
 
     return result
   }())
